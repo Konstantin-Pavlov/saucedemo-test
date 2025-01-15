@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @Epic("UI")
 @Feature("User Login")
+//@ExtendWith({AllureJunit5.class})
 public class LoginTests extends BaseSelenideTest {
 
     private final LoginPage loginPage = page(LoginPage.class);
@@ -40,7 +41,6 @@ public class LoginTests extends BaseSelenideTest {
         LOG.info("Submitting the login form.");
         loginPage.clickLogin();
     }
-
 
     private void verifySuccessfulLogin() {
         String expectedUrl = "https://www.saucedemo.com/inventory.html";
