@@ -115,7 +115,6 @@ mvn test -Dgroups="order_processing"
   │       └── util
   │           └── BrowserUtils.java
   └── resources
-  ├── allure.properties
   └── application.properties
 ```
 
