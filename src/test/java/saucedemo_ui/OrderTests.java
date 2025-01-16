@@ -2,6 +2,7 @@ package saucedemo_ui;
 
 import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import saucedemo_ui.page.BasketPage;
@@ -12,6 +13,12 @@ import saucedemo_ui.page.OrderConfirmationPage;
 
 import static com.codeborne.selenide.Selenide.page;
 
+/**
+ * Test class for verifying the order processing flow.
+ * This class includes a test for adding an item to the basket, completing the checkout process,
+ * and verifying the order completion.
+ * It simulates the actions of logging in, adding an item to the cart, checking out, and finalizing the order.
+ */
 @Tag("order_processing")
 public class OrderTests extends BaseSelenideTest {
     private final InventoryPage inventoryPage = page(InventoryPage.class);
@@ -22,7 +29,14 @@ public class OrderTests extends BaseSelenideTest {
     private final String lastName = faker.name().lastName();
     private final String zipCode = faker.address().zipCode();
 
+    /**
+     * Test that adds an item to the basket and completes the order process.
+     * The test involves logging in, adding an item to the basket, verifying its presence in the basket,
+     * proceeding with checkout, entering required details, and confirming the order.
+     */
     @Test
+    @Step("Log in as standard user")
+    @DisplayName("test adding item to the cart and complete the order")
     public void testAddItemToBasketAndCompleteOrder() {
         LOG.info("Starting test: Add item to basket and complete order.");
         loginAsStandardUser();
