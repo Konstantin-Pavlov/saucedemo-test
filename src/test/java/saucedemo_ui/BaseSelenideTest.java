@@ -1,18 +1,16 @@
 package saucedemo_ui;
 
-import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
 import config.ConfigProvider;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.chrome.ChromeOptions;
+import saucedemo_ui.util.BrowserUtils;
 
 
 /**
@@ -33,12 +31,7 @@ abstract public class BaseSelenideTest {
      * Инициализация selenide с настройками
      */
     public void setUp() {
-        WebDriverManager.edgedriver().setup();
-
-        Configuration.browser = "edge";
-        Configuration.driverManagerEnabled = true;
-        Configuration.browserSize = "1920x1080";
-        Configuration.headless = false;
+        BrowserUtils.browserSetup();
 
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide()
                 .screenshots(true)

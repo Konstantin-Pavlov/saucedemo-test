@@ -1,10 +1,8 @@
 package saucedemo_ui;
 
 import com.codeborne.selenide.Condition;
-import io.qameta.allure.Allure;
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import saucedemo_ui.page.BasketPage;
 import saucedemo_ui.page.CheckoutPage;
@@ -14,8 +12,7 @@ import saucedemo_ui.page.OrderConfirmationPage;
 
 import static com.codeborne.selenide.Selenide.page;
 
-@Epic("UI")
-@Feature("Order Processing")
+@Tag("order_processing")
 public class OrderTests extends BaseSelenideTest {
     private final InventoryPage inventoryPage = page(InventoryPage.class);
     private final BasketPage basketPage = page(BasketPage.class);

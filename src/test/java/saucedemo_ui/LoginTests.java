@@ -1,17 +1,14 @@
 package saucedemo_ui;
 
-
-import io.qameta.allure.Epic;
-import io.qameta.allure.Feature;
 import io.qameta.allure.Step;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import saucedemo_ui.page.LoginPage;
 
 import static com.codeborne.selenide.Selenide.page;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@Epic("UI")
-@Feature("User Login")
+@Tag("user_login")
 public class LoginTests extends BaseSelenideTest {
 
     private final LoginPage loginPage = page(LoginPage.class);
