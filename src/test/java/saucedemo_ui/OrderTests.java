@@ -10,27 +10,28 @@ import saucedemo_ui.page.CheckoutPage;
 import saucedemo_ui.page.InventoryPage;
 import saucedemo_ui.page.LoginPage;
 import saucedemo_ui.page.OrderConfirmationPage;
-import saucedemo_ui.util.BrowserUtils;
 
 import static com.codeborne.selenide.Selenide.page;
-import static com.codeborne.selenide.Selenide.sleep;
 
 @Epic("UI")
 @Feature("Order Processing")
-public class OrderTests extends BaseSelenideTest{
+public class OrderTests extends BaseSelenideTest {
     private final InventoryPage inventoryPage = page(InventoryPage.class);
     private final BasketPage basketPage = page(BasketPage.class);
     private final CheckoutPage checkoutPage = page(CheckoutPage.class);
     private final OrderConfirmationPage orderConfirmationPage = page(OrderConfirmationPage.class);
+    private final String firstName = faker.name().firstName();
+    private final String lastName = faker.name().lastName();
+    private final String zipCode = faker.address().zipCode();
 
     @Test
     public void testAddItemToBasketAndCompleteOrder() {
         LOG.info("Starting test: Add item to basket and complete order.");
         loginAsStandardUser();
-        addItemToBasket("Sauce Labs Backpack");
-        verifyItemInBasket("Sauce Labs Backpack");
+        addItemToBasket();
+        verifyItemInBasket();
         proceedToCheckout();
-        fillCheckoutInformation("John", "Doe", "12345");
+        fillCheckoutInformation();
         completeOrder();
         verifyOrderCompletion();
     }
@@ -39,25 +40,25 @@ public class OrderTests extends BaseSelenideTest{
     private void loginAsStandardUser() {
         LOG.info("Opening login page and logging in as standard user.");
         LoginPage loginPage = page(LoginPage.class);
-        loginPage.openPage()
-                .setUsername("standard_user")
-                .setPassword("secret_sauce")
+        loginPage.openPage(BASE_URL)
+                .setUsername(USER_NAME)
+                .setPassword(PASSWORD)
                 .clickLogin();
         LOG.info("User logged in successfully.");
     }
 
     @Step("Add item {itemName} to basket")
-    private void addItemToBasket(String itemName) {
-        LOG.info("Adding item '{}' to the basket.", itemName);
-        inventoryPage.addItemToBasket(itemName);
-        LOG.info("Item '{}' added to the basket.", itemName);
+    private void addItemToBasket() {
+        LOG.info("Adding item '{}' to the basket.", ITEM_TO_ADD);
+        inventoryPage.addItemToBasket(ITEM_TO_ADD);
+        LOG.info("Item '{}' added to the basket.", ITEM_TO_ADD);
     }
 
     @Step("Verify item {itemName} is in the basket")
-    private void verifyItemInBasket(String itemName) {
-        LOG.info("Verifying that item '{}' is in the basket.", itemName);
-        basketPage.openPage().verifyItemInCart(itemName);
-        LOG.info("Item '{}' is in the basket.", itemName);
+    private void verifyItemInBasket() {
+        LOG.info("Verifying that item '{}' is in the basket.", ITEM_TO_ADD);
+        basketPage.openPage(CART_URL).verifyItemInCart(ITEM_TO_ADD);
+        LOG.info("Item '{}' is in the basket.", ITEM_TO_ADD);
     }
 
     @Step("Proceed to checkout")
@@ -68,12 +69,13 @@ public class OrderTests extends BaseSelenideTest{
     }
 
     @Step("Fill checkout information: {firstName}, {lastName}, {postalCode}")
-    private void fillCheckoutInformation(String firstName, String lastName, String postalCode) {
-        LOG.info("Filling out checkout information: {} {} with postal code: {}", firstName, lastName, postalCode);
-        checkoutPage.fillInCheckoutInfo(firstName, lastName, postalCode)
+    private void fillCheckoutInformation() {
+
+
+        LOG.info("Filling out checkout information: {} {} with postal code: {}", firstName, lastName, zipCode);
+        checkoutPage.fillInCheckoutInfo(firstName, lastName, zipCode)
                 .clickContinue();
         LOG.info("Checkout information filled successfully.");
-        sleep(1000);
     }
 
     @Step("Complete the order")
@@ -87,9 +89,8 @@ public class OrderTests extends BaseSelenideTest{
     private void verifyOrderCompletion() {
         LOG.info("Verifying order completion.");
         orderConfirmationPage.getConfirmationMessage()
-                .shouldHave(Condition.text("Thank you for your order!"));
+                .shouldHave(Condition.text(PLACING_ORDER_MESSAGE));
         LOG.info("Order completion verified successfully.");
-        sleep(3000);
     }
 
 }

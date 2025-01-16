@@ -18,6 +18,8 @@
         <junit.jupiter.version>5.10.0</junit.jupiter.version>
         <webdrivermanager.version>5.7.0</webdrivermanager.version>
         <log4j.version>2.20.0</log4j.version>
+        <javafaker.version>1.0.2</javafaker.version>
+        <owner.version>1.0.12</owner.version>
     </properties>
 
     <dependencies>
@@ -99,6 +101,17 @@
             <version>2.24.3</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.javafaker</groupId>
+            <artifactId>javafaker</artifactId>
+            <version>${javafaker.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.aeonbits.owner</groupId>
+            <artifactId>owner</artifactId>
+            <version>${owner.version}</version>
+        </dependency>
 
     </dependencies>
 
