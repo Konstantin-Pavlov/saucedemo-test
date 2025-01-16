@@ -24,6 +24,7 @@ abstract public class BaseSelenideTest {
     protected static final String CART_URL = ConfigProvider.getConfig().cartUrl();
     protected static final String ITEM_TO_ADD = ConfigProvider.getConfig().itemToAdd();
     protected static final String PLACING_ORDER_MESSAGE = ConfigProvider.getConfig().placingOrderMessage();
+    protected static final String LOGIN_FAILED_MESSAGE = ConfigProvider.getConfig().loginFailedMessage();
     protected static final String USER_NAME = ConfigProvider.getConfig().userName();
     protected static final String PASSWORD = ConfigProvider.getConfig().password();
 
