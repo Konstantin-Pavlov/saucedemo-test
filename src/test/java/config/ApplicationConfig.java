@@ -20,6 +20,9 @@ public interface ApplicationConfig extends Config {
     @Key("placing_order_message")
     String placingOrderMessage();
 
+    @Key("login_failed_message")
+    String loginFailedMessage();
+
     @Key("user_name")
     String userName();
 

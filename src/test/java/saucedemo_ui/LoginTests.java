@@ -12,6 +12,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LoginTests extends BaseSelenideTest {
 
     private final LoginPage loginPage = page(LoginPage.class);
+    private final String wrongFirstName = faker.name().firstName();
+    private final String wrongPassword = faker.internet().password();
 
     @Test
     @Step("Test the successful login with valid credentials")
@@ -20,6 +22,15 @@ public class LoginTests extends BaseSelenideTest {
         enterCredentials();
         submitLogin();
         verifySuccessfulLogin();
+    }
+
+    @Test
+    @Step("Test the failed login with invalid credentials")
+    public void testFailedLogin() {
+        openLoginPage();
+        enterWrongCredentials();
+        submitLogin();
+        verifyFailedLogin();
     }
 
     private void openLoginPage() {
@@ -33,6 +44,12 @@ public class LoginTests extends BaseSelenideTest {
         loginPage.setPassword(PASSWORD);
     }
 
+    private void enterWrongCredentials() {
+        LOG.info("Entering wrong credentials: username = {}, password = {}", wrongFirstName, wrongPassword);
+        loginPage.setUsername(wrongFirstName);
+        loginPage.setPassword(wrongPassword);
+    }
+
     private void submitLogin() {
         LOG.info("Submitting the login form.");
         loginPage.clickLogin();
@@ -43,5 +60,12 @@ public class LoginTests extends BaseSelenideTest {
         String actualUrl = com.codeborne.selenide.WebDriverRunner.url();
         LOG.info("Verifying successful login. Expected URL: {}, Actual URL: {}", expectedUrl, actualUrl);
         assertEquals(expectedUrl, actualUrl, "Login was not successful");
+    }
+
+    private void verifyFailedLogin() {
+        String expectedErrorMessage = LOGIN_FAILED_MESSAGE; // Example message
+        String actualErrorMessage = loginPage.getErrorMessage();
+        LOG.info("Verifying failed login. Expected error message: {}, Actual error message: {}", expectedErrorMessage, actualErrorMessage);
+        assertEquals(expectedErrorMessage, actualErrorMessage, "Error message does not match the expected value");
     }
 }
