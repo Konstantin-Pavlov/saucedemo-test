@@ -17,8 +17,8 @@ public class LoginPage {
 
     // Open the login page
     @Step("Open the login page")
-    public LoginPage openPage() {
-        open("https://www.saucedemo.com/");
+    public LoginPage openPage(String url) {
+        open(url);
         return this;
     }
 

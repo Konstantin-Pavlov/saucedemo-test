@@ -3,7 +3,6 @@ package saucedemo_ui.page;
 import com.codeborne.selenide.Condition;
 
 import static com.codeborne.selenide.Selenide.$;
-import static com.codeborne.selenide.Selenide.sleep;
 
 public class CheckoutPage {
     public CheckoutPage fillInCheckoutInfo(String firstName, String lastName, String postalCode) {
@@ -19,7 +18,6 @@ public class CheckoutPage {
 
     public void clickFinish() {
         $("#finish").click();
-        sleep(1000);
     }
 
 }

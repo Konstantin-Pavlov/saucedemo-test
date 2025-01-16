@@ -1,18 +1,16 @@
 package saucedemo_ui.page;
 
+import com.codeborne.selenide.ClickOptions;
 import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.open;
-import static com.codeborne.selenide.Selenide.sleep;
-import com.codeborne.selenide.ClickOptions;
 
 public class BasketPage {
-    public BasketPage openPage() {
-        open("https://www.saucedemo.com/cart.html");
+    public BasketPage openPage(String url) {
+        open(url);
         return this;
     }
 
@@ -22,10 +20,7 @@ public class BasketPage {
     }
 
     public void clickCheckout() {
-//        $("#checkout").shouldBe(Condition.visible).click();
-//        $("#checkout").shouldBe(Condition.visible).shouldBe(Condition.enabled).click();
         $("#checkout").click(ClickOptions.usingJavaScript());
-//        executeJavaScript("arguments[0].click();", $("#checkout"));
     }
 
 }
