@@ -1,6 +1,7 @@
 package saucedemo_ui;
 
 import com.codeborne.selenide.Condition;
+import io.qameta.allure.Allure;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Step;

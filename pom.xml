@@ -15,11 +15,13 @@
         <selenide.version>6.14.0</selenide.version>
         <lombok.version>1.18.30</lombok.version>
         <allure.version>2.23.0</allure.version>
+        <maven-allure-version>2.12.0</maven-allure-version>
         <junit.jupiter.version>5.10.0</junit.jupiter.version>
         <webdrivermanager.version>5.7.0</webdrivermanager.version>
         <log4j.version>2.20.0</log4j.version>
         <javafaker.version>1.0.2</javafaker.version>
         <owner.version>1.0.12</owner.version>
+        <aspectj.version>1.9.22</aspectj.version>
     </properties>
 
     <dependencies>
@@ -113,6 +115,12 @@
             <version>${owner.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>${aspectj.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -127,6 +135,9 @@
                     <systemPropertyVariables>
                         <allure.results.directory>${project.build.directory}/allure-results</allure.results.directory>
                     </systemPropertyVariables>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
                 </configuration>
             </plugin>
 
@@ -149,9 +160,9 @@
             <plugin>
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
-                <version>2.10.0</version>
+                <version>${maven-allure-version}</version>
                 <configuration>
-                    <reportDirectory>target/allure-results</reportDirectory>
+                    <reportDirectory>${project.build.directory}/allure-report</reportDirectory>
                 </configuration>
             </plugin>
 

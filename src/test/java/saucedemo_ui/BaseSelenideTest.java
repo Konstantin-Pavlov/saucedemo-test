@@ -6,6 +6,7 @@ import com.codeborne.selenide.logevents.SelenideLogger;
 import com.github.javafaker.Faker;
 import config.ConfigProvider;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -32,13 +33,7 @@ abstract public class BaseSelenideTest {
      * Инициализация selenide с настройками
      */
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
-
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-popup-blocking");
-        options.addArguments("--disable-infobars");
-        options.addArguments("--disable-password-manager-reauthentication");
-        options.addArguments("--disable-notifications");
+        WebDriverManager.edgedriver().setup();
 
         Configuration.browser = "edge";
         Configuration.driverManagerEnabled = true;
@@ -62,6 +57,7 @@ abstract public class BaseSelenideTest {
      * Выполнение метода после каждого закрытия тестов
      */
     @AfterEach
+    @Step("Closing webdriver")
     public void tearDown() {
         Selenide.closeWebDriver();
     }
