@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Console Appender for logging output to the console -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <Layout>
+                <PatternLayout>
+                    <Pattern>%d{ISO8601} [%t] %-5level: %msg%n</Pattern>
+                </PatternLayout>
+            </Layout>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- Root logger that logs all messages with level INFO or higher -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
