@@ -1,6 +1,7 @@
 package saucedemo_ui;
 
 import io.qameta.allure.Step;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import saucedemo_ui.page.LoginPage;
@@ -8,6 +9,11 @@ import saucedemo_ui.page.LoginPage;
 import static com.codeborne.selenide.Selenide.page;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Test class for verifying login functionality.
+ * This class contains tests for both successful and failed login attempts using valid and invalid credentials.
+ * It uses the LoginPage for interacting with the login form and verifying the login outcome.
+ */
 @Tag("user_login")
 public class LoginTests extends BaseSelenideTest {
 
@@ -15,7 +21,13 @@ public class LoginTests extends BaseSelenideTest {
     private final String wrongFirstName = faker.name().firstName();
     private final String wrongPassword = faker.internet().password();
 
+    /**
+     * Tests the successful login with valid credentials.
+     * This test simulates the process of logging in with valid credentials and verifying the successful login
+     * by checking the URL after login.
+     */
     @Test
+    @DisplayName("Test the successful login with valid credentials")
     @Step("Test the successful login with valid credentials")
     public void testSuccessfulLogin() {
         openLoginPage();
@@ -24,7 +36,13 @@ public class LoginTests extends BaseSelenideTest {
         verifySuccessfulLogin();
     }
 
+    /**
+     * Tests the failed login with invalid credentials.
+     * This test simulates the process of logging in with invalid credentials and verifies the error message
+     * displayed on the login page.
+     */
     @Test
+    @DisplayName("Test the failed login with invalid credentials")
     @Step("Test the failed login with invalid credentials")
     public void testFailedLogin() {
         openLoginPage();
